@@ -1,0 +1,52 @@
+[
+  {
+    "title": "Read a book",
+    "description": "20 pages every day",
+    "isCompleted": false
+  },
+  {
+    "title": "Exercise",
+    "description": "30 minutes of walking",
+    "isCompleted": true
+  },
+  {
+    "title": "Study SwiftUI",
+    "description": "Learn List, Navigation, and State",
+    "isCompleted": false
+  },
+  {
+    "title": "Do the shopping",
+    "description": "Buy fruits and vegetables",
+    "isCompleted": true
+  },
+  {
+    "title": "Cook dinner",
+    "description": "Prepare pasta for the evening",
+    "isCompleted": false
+  },
+  {
+    "title": "Clean the house",
+    "description": "Organize the living room and kitchen",
+    "isCompleted": true
+  },
+  {
+    "title": "Listen to music",
+    "description": "Play relaxing songs",
+    "isCompleted": false
+  },
+  {
+    "title": "Meditate",
+    "description": "10 minutes of breathing exercise",
+    "isCompleted": true
+  },
+  {
+    "title": "Watch a movie",
+    "description": "Catch up on your favorite series",
+    "isCompleted": false
+  },
+  {
+    "title": "Call a friend",
+    "description": "Talk to someone you haven't spoken with in a while",
+    "isCompleted": true
+  }
+]
