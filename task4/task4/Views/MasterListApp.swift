@@ -9,14 +9,18 @@ import SwiftUI
 
 struct MasterListApp: View {
     @State private var tasks: [TaskItem] = loadTasks()
+
+
     
     var body: some View {
+        let toBeCompleted = tasks.filter { !$0.isCompleted }
+        let completedItems = tasks.filter { $0.isCompleted }
+        
         NavigationView {
-            
             List {
                 
                 Section(header: Text("To Be Completed")){
-                    ForEach(tasks.filter { !$0.isCompleted}){ task in
+                    ForEach(toBeCompleted){ task in
                         NavigationLink(destination: TaskDetailView(task: task)){
                             Text(task.title)
                         }
@@ -24,7 +28,7 @@ struct MasterListApp: View {
                 }
                 
                 Section(header: Text("Completed Items")){
-                    ForEach(tasks.filter { $0.isCompleted}){ task in
+                    ForEach(completedItems){ task in
                         NavigationLink(destination: TaskDetailView(task: task)){
                             Text(task.title)
                         }

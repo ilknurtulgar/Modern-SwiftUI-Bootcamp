@@ -8,20 +8,22 @@
 import SwiftUI
 
 struct TaskDetailView: View {
+    var task: TaskItem
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-        
-        //                VStack(alignment: .leading){
-        //                    Text(task.title)
-        //                        .font(.headline)
-        //                    Text(task.description)
-        //                        .font(.subheadline)
-        //                        .foregroundColor(.gray)
-        //
-        //                }
+        VStack(alignment: .leading){
+               Text(task.title)
+                       .font(.largeTitle)
+                       .bold()
+            
+                Text(task.description)
+                        .font(.body)
+        }
+        .padding()
+        .navigationTitle("Task Detail")
     }
 }
 
 #Preview {
-    TaskDetailView()
+    TaskDetailView(task: TaskItem(title: "Make the cook honey", description: "two eggs, 1 glass oil etc...", isCompleted: false))
 }

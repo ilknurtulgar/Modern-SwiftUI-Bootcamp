@@ -8,7 +8,7 @@
 import Foundation
 
 struct TaskItem: Identifiable, Codable{
-    var id: UUID? = nil
+    var id: UUID? = UUID()
     var title: String
     var description: String
     var isCompleted: Bool
