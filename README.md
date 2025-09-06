@@ -13,3 +13,6 @@ Profile image, name, info cards, "About Me", action buttons.
 
 ### 📌 Assignment 3 – Basic Counter with @State
 Counter with increment and decrement buttons.
+
+### 📌 Assignment 4 – MasterListApp with Sections and Navigation
+Dynamic list of tasks loaded from JSON; tasks separated into "To Be Completed" and "Completed Items"; navigation to detail view with title, description, and SF Symbol.
