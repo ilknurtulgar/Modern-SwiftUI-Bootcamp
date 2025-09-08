@@ -15,4 +15,4 @@ Profile image, name, info cards, "About Me", action buttons.
 Counter with increment and decrement buttons.
 
 ### 📌 Assignment 4 – MasterListApp with Sections and Navigation
-Dynamic list of tasks loaded from JSON; tasks separated into "To Be Completed" and "Completed Items"; navigation to detail view with title, description, and SF Symbol.
+MasterListApp is a SwiftUI task manager that loads tasks from JSON and UserDefaults, separating them into "To Be Completed" and "Completed Items". Tap a task to see its title, description, and SF Symbol. The app features dynamic background colors on view load and allows swipe-to-delete for tasks.
