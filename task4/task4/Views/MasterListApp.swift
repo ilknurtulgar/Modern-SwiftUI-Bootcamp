@@ -8,34 +8,65 @@
 import SwiftUI
 
 struct MasterListApp: View {
-    @State private var tasks: [TaskItem] = loadTasks()
-
-
+    @StateObject private var controller = TaskController()
+    @State private var themeColor: Color = .white
     
     var body: some View {
-        let toBeCompleted = tasks.filter { !$0.isCompleted }
-        let completedItems = tasks.filter { $0.isCompleted }
-        
         NavigationView {
-            List {
-                
-                Section(header: Text("To Be Completed")){
-                    ForEach(toBeCompleted){ task in
-                        NavigationLink(destination: TaskDetailView(task: task)){
-                            Text(task.title)
+            ZStack {
+                themeColor.edgesIgnoringSafeArea(.all)
+                VStack(){
+                    HStack {
+                        VStack(){
+                            
+                            TextField("Title", text: $controller.newTaskTitle)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                            
+                            TextField("Description", text: $controller.newTaskDescription)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                        }
+                        Button("Add"){
+                            controller.addNewTask()
+                        }.padding()
+                        
+                    }.padding()
+                    
+                    List {
+                        
+                        Section(header: Text("To Be Completed")){
+                            ForEach(controller.toBeCompleted){ task in
+                                NavigationLink(destination: TaskDetailView(task: task)){
+                                    Text(task.title)
+                                }
+                            }
+                            .onDelete{ index in
+                                controller.deleteTasks(at:index,from: &controller.tasks,filter: controller.toBeCompleted)
+                            }
+                        }
+                        
+                        Section(header: Text("Completed Items")){
+                            ForEach(controller.completedItems){ task in
+                                NavigationLink(destination: TaskDetailView(task: task)){
+                                    Text(task.title)
+                                }
+                            }
+                            .onDelete { index in
+                                controller.deleteTasks(at: index, from: &controller.tasks, filter: controller.completedItems)
+                            }
                         }
                     }
+                    .listStyle(GroupedListStyle())
                 }
-                
-                Section(header: Text("Completed Items")){
-                    ForEach(completedItems){ task in
-                        NavigationLink(destination: TaskDetailView(task: task)){
-                            Text(task.title)
-                        }
-                    }
+                .navigationTitle("Master List")
+                .onAppear{
+                    themeColor = Color(
+                        red: .random(in: 0...1),
+                        green: .random(in: 0...1),
+                        blue: .random(in: 0...1)
+                        
+                    )
                 }
             }
-            .navigationTitle("Master List")
         }
     }
 }

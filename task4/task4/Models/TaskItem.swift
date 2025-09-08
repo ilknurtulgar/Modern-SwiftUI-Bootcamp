@@ -13,4 +13,3 @@ struct TaskItem: Identifiable, Codable{
     var description: String
     var isCompleted: Bool
 }
-

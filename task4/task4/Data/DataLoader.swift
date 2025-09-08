@@ -7,21 +7,39 @@
 
 import Foundation
 
-func loadTasks() -> [TaskItem] {
-    guard let url = Bundle.main.url(forResource: "data", withExtension: "json"),
-          let data = try? Data(contentsOf: url) else { return [] }
 
-    do {
-        var tasks = try JSONDecoder().decode([TaskItem].self, from: data)
-        for i in 0..<tasks.count {
-            tasks[i].id = UUID()
-        }
-        print("live")
-        return tasks
-    } catch {
-        print("die", error)
-        return []
+func saveTasks(_ tasks: [TaskItem]){
+    if let encoded = try? JSONEncoder().encode(tasks) {
+        UserDefaults.standard.set(encoded, forKey: "tasks")
     }
 }
+
+func loadTasks() -> [TaskItem] {
+    var tasks: [TaskItem] = []
+
+    var bundleTasks: [TaskItem] = []
+    if let url = Bundle.main.url(forResource: "data", withExtension: "json"),
+       let data = try? Data(contentsOf: url),
+       let decoded = try? JSONDecoder().decode([TaskItem].self, from: data) {
+        bundleTasks = decoded
+    }
+
+    var userTasks: [TaskItem] = []
+    if let data = UserDefaults.standard.data(forKey: "tasks"),
+       let decoded = try? JSONDecoder().decode([TaskItem].self, from: data) {
+        userTasks = decoded
+    }
+
+    let filteredBundleTasks = bundleTasks.filter { bundleTask in
+        !userTasks.contains(where: { $0.id == bundleTask.id })
+    }
+
+
+    tasks.append(contentsOf: filteredBundleTasks)
+    tasks.append(contentsOf: userTasks)
+
+    return tasks
+}
+
 
 
