@@ -11,7 +11,7 @@ import SwiftUI
 struct task5App: App {
     var body: some Scene {
         WindowGroup {
-            TaskManagementApp()
+            TaskManagementView()
         }
     }
 }
