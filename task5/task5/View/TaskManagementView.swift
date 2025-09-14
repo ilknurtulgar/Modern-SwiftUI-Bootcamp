@@ -21,7 +21,7 @@ struct TaskManagementView: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
                 Button(action: {
-                    
+                    taskViewModel.addTask()
                 }){
                     Text("Add")
                         .padding()
@@ -33,10 +33,33 @@ struct TaskManagementView: View {
             .padding()
             
             List{
-                
+                ForEach(taskViewModel.tasks) {task in
+                    
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(task.title)
+                                .font(.headline)
+                                .strikethrough(task.isCompleted)
+                            
+                            if !task.description.isEmpty {
+                                Text(task.description)
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                                
+                            }
+                        }
+                        Spacer()
+                        Button(action: {
+                            taskViewModel.toggleCompletion(for: task)
+                        }){
+                            Image(systemName: task.isCompleted ? "checkmark.circle.fill" : "circle")
+                                .foregroundColor(task.isCompleted ? .pink : .gray)
+                        }
+                    }
+                }
+                .onDelete(perform: taskViewModel.deleteTask)
             }
         }
-        
     }
 }
 
