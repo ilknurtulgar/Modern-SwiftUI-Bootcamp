@@ -28,10 +28,16 @@ struct NotesListView: View {
             }
             .navigationTitle("My Notes")
             .toolbar{
-                Button
+                Button{
+                    showAddNote = true
+                }label:{
+                    Image(systemName: "plus")
+                }
+            }
+            .sheet(isPresented: $showAddNote){
+                AddNoteView(viewModel: viewModel)
             }
         }
-
     }
 }
 

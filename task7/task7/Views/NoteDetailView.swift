@@ -9,8 +9,17 @@ import SwiftUI
 
 struct NoteDetailView: View {
     var note: Note
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+       Form {
+           Section(header: Text("Note Details")){
+               Text("Title: \(note.title)")
+               Text("Content: \(note.content)")
+               Text("Date: \(note.date.formatted(date: .abbreviated, time: .omitted))")
+             
+           }
+        }
+       .navigationTitle("Details")
     }
 }
 
