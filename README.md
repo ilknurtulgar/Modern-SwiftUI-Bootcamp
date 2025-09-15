@@ -22,3 +22,7 @@ This is a task manager built using MVVM. Users can add, delete, and toggle tasks
 
 ### 📌 Assignment 6 – Event Management App (MVVM)
 This app lets users manage events by adding them through a modal form, viewing them in a list, checking full details, and deleting when needed. Each event includes a title, date, type, and an optional reminder, and the UI updates reactively with MVVM.
+
+### 📌 Assignment 7 – Notes App (UserDefaults & Codable)
+A Notes app developed using the MVVM architecture that permanently saves user-created notes using UserDefaults and Codable. Users can add, view, and optionally delete notes, each containing a title, content, and date. 
+
