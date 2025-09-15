@@ -17,10 +17,10 @@ Counter with increment and decrement buttons.
 ### 📌 Assignment 4 – MasterListApp with Sections and Navigation
 MasterListApp is a SwiftUI task manager built using the MVC pattern. It loads tasks from JSON and UserDefaults, separating them into "To Be Completed" and "Completed Items". Tap a task to see its title, description, and SF Symbol. The app features dynamic background colors on view load and allows swipe-to-delete for tasks.
 
-### 📌 Assignment 5 – Task Management App (MVVM)
+### 📌 Assignment 5 – Task Management App
 This is a task manager built using MVVM. Users can add, delete, and toggle tasks. The UI updates reactively using @Published properties.
 
-### 📌 Assignment 6 – Event Management App (MVVM)
+### 📌 Assignment 6 – Event Management App
 This app lets users manage events by adding them through a modal form, viewing them in a list, checking full details, and deleting when needed. Each event includes a title, date, type, and an optional reminder, and the UI updates reactively with MVVM.
 
 ### 📌 Assignment 7 – Notes App (UserDefaults & Codable)
