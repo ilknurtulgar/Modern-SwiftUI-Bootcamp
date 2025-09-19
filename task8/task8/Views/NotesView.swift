@@ -6,13 +6,29 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct NotesView: View {
+    @StateObject private var viewModel =  NotesViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView{
+            List {
+                ForEach(viewModel.notes) { note in
+                    NavigationLink(destination: NoteDetailView()) {
+                        VStack(alignment: .leading) {
+                            Text(note.title ?? "No Title")
+                            if let date = note.date {
+                                Text(date.formatted(date: .abbreviated, time: .omitted))
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
-#Preview {
-    NotesView()
-}
+//#Preview {
+//    NotesView()
+//}

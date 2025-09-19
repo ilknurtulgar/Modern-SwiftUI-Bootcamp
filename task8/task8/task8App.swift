@@ -6,12 +6,16 @@
 //
 
 import SwiftUI
+import CoreData
 
 @main
 struct task8App: App {
+    let persistenceController = PersistenceController.shared
     var body: some Scene {
         WindowGroup {
-           NotesView()
+            NotesView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            //viewContext, core data ile ui arasındaki köprü
         }
     }
 }

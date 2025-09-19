@@ -6,8 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		83B965C12E7D8D6D00850873 /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B965BF2E7D8D6D00850873 /* Note+CoreDataClass.swift */; };
+		83B965C22E7D8D6D00850873 /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B965C02E7D8D6D00850873 /* Note+CoreDataProperties.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		83747F3F2E7D7B6900C5ED60 /* task8.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = task8.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		83B965BF2E7D8D6D00850873 /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = "<group>"; };
+		83B965C02E7D8D6D00850873 /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -32,6 +39,8 @@
 		83747F362E7D7B6900C5ED60 = {
 			isa = PBXGroup;
 			children = (
+				83B965BF2E7D8D6D00850873 /* Note+CoreDataClass.swift */,
+				83B965C02E7D8D6D00850873 /* Note+CoreDataProperties.swift */,
 				83747F412E7D7B6900C5ED60 /* task8 */,
 				83747F402E7D7B6900C5ED60 /* Products */,
 			);
@@ -119,6 +128,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83B965C12E7D8D6D00850873 /* Note+CoreDataClass.swift in Sources */,
+				83B965C22E7D8D6D00850873 /* Note+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
