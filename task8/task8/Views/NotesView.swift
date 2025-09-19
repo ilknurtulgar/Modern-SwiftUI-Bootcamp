@@ -22,7 +22,7 @@ struct NotesView: View {
                 {
                     List {
                         ForEach(viewModel.notes) { note in
-                            NavigationLink(destination: NoteDetailView()) {
+                            NavigationLink(destination: NoteDetailView(note: note, viewModel: viewModel)) {
                                 VStack(alignment: .leading) {
                                     Text(note.title ?? "No Title")
                                     if let date = note.date {

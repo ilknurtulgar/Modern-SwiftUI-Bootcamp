@@ -62,4 +62,16 @@ class NotesViewModel: ObservableObject {
             print("error deleting: \(error.localizedDescription)")
         }
     }
+    
+    func changeNote(_ note: Note, newTitle: String, newContent: String){
+        note.title = newTitle
+        note.content = newContent
+        note.date = Date()
+        do{
+            try viewContext.save()
+            fetchNotes()
+        } catch{
+            print("error saving note: \(error.localizedDescription)")
+        }
+    }
 }
