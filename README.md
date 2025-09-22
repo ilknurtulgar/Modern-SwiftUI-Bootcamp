@@ -26,3 +26,9 @@ This app lets users manage events by adding them through a modal form, viewing t
 ### 📌 Assignment 7 – Notes App (UserDefaults & Codable)
 A Notes app developed using the MVVM architecture that permanently saves user-created notes using UserDefaults and Codable. Users can add, view, and optionally delete notes, each containing a title, content, and date. 
 
+### 📌 Assignment 8 - Notes App (Core Data & CRUD)
+A Notes app developed using the MVVM architecture with Core Data for persistence.
+Users can add, view, delete, and edit notes, each containing a title, content, and date.
+The project demonstrates the use of Core Data for local storage and full CRUD operations (Create, Read, Update, Delete).
+
+
