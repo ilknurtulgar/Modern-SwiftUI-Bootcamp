@@ -10,7 +10,25 @@ import SwiftUI
 struct WeatherView: View {
     @StateObject var weatViewModel = WeatherViewModel()
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            if let weather = weatViewModel.weather{
+                Text(weather.name)
+                    .font(.title)
+                    .padding()
+                Text("\(weather.main.temp, specifier: "%.1f")°C")
+                    .font(.largeTitle)
+            }else if let errorMesage = weatViewModel.errorMessage{
+                Text("Error: \(errorMesage)")
+                    .foregroundColor(.red)
+            }
+            else{
+                ProgressView()
+                Text("Loading...")
+            }
+        }
+        .onAppear{
+            weatViewModel.fetchWeather(for: "Istanbul")
+        }
     }
 }
 

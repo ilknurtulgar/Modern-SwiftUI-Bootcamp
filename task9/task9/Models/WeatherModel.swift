@@ -11,9 +11,9 @@ import Foundation
  */
 
 struct WeatherResponse: Codable{
-    let cityName: String
+    let name: String
     let weather: [Weather]
-    let mainInfo: Main
+    let main: Main
 }
 
 struct Weather: Codable{
