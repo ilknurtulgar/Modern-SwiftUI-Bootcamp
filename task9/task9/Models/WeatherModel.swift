@@ -10,7 +10,8 @@ import Foundation
 /*https://api.openweathermap.org/data/2.5/weather?q={CITY},{STATE_CODE},{COUNTRY_CODE}&appid={API_KEY}&units=metric&lang=tr
  */
 
-struct WeatherResponse: Codable{
+struct WeatherResponse: Codable, Identifiable{
+    let id: Int
     let name: String
     let weather: [Weather]
     let main: Main

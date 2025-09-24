@@ -8,31 +8,35 @@
 import Foundation
 
 class WeatherViewModel: ObservableObject {
-    @Published var weather: WeatherResponse?
-    @Published var errorMessage: String?
+    @Published var weather: [WeatherResponse] = []
     
-    func fetchWeather(for city: String) {
-        let apiKey = "f7091c7b4ebad85106a3d96dcd28ec8e"
-        let urlString = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=\(apiKey)&units=metric"
+    private let apiKey = "f7091c7b4ebad85106a3d96dcd28ec8e"
+   
+    func fetchWeather(for cities: [String]){
+        weather.removeAll()
         
-        guard let url = URL(string: urlString)else{
-            errorMessage = "Invalid URL"
-            return
-        }
-      
-        URLSession.shared.dataTask(with: url){ [self]data,response,error in
-            if let data = data{
+        for city in cities{
+            let cityQuery = city.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? city
+            let urlString = "https://api.openweathermap.org/data/2.5/weather?q=\(cityQuery)&appid=\(apiKey)&units=metric"
+            
+            guard let url = URL(string: urlString) else { continue }
+            
+            URLSession.shared.dataTask(with: url){ [weak self] data, _, error in
+                if let error = error {
+                    print("error: \(error.localizedDescription)")
+                    return
+                }
+                guard let data = data else { return }
+                
                 do{
                     let decoded = try JSONDecoder().decode(WeatherResponse.self, from: data)
                     DispatchQueue.main.async {
-                        self.weather = decoded
+                        self?.weather.append(decoded)
                     }
                 }catch{
-                    errorMessage = "Decoding error"
-                    return
+                    print("decode error : \(error)")
                 }
-            }
+            }.resume()
         }
-        .resume()
     }
 }
