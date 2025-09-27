@@ -24,6 +24,7 @@ extension CharacterEntity {
     @NSManaged public var image: String?
     @NSManaged public var originName: String?
     @NSManaged public var locationName: String?
+    
 
 }
 

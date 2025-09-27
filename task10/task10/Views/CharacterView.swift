@@ -10,7 +10,7 @@ import CoreData
 
 struct CharacterView: View {
     @StateObject private var viewModel = MainViewModel(viewContext: PersistenceController.shared.container.viewContext)
-    
+   
     var body: some View {
         NavigationView{
             if viewModel.isLoading {
@@ -45,6 +45,15 @@ struct CharacterView: View {
                                         .font(.subheadline)
                                         .foregroundColor(.gray)
                                 }
+                                Spacer()
+                                
+                                Button(action: {
+                                    character.isFavorite.toggle()
+                                    try? viewContext.save()
+                                }) {
+                                    Image(systemName: character.isFavorite ? "heart.fill" : "heart")
+                                        .foregroundColor(character.isFavorite ? .red : .gray)
+                                }
                             }
                             .padding(.vertical,5)
                         }
@@ -55,6 +64,14 @@ struct CharacterView: View {
                     await viewModel.fetchCharactersFromAPI()
                 }
                 .navigationTitle("Characters")
+                .toolbar{
+                    ToolbarItem(placement: .navigationBarTrailing){
+                        NavigationLink(destination: FavoriteView()){
+                            Image(systemName: "heart.fill")
+                                .foregroundColor(Color.gray.opacity(0.5))
+                        }
+                    }
+                }
             }
         }
         

@@ -8,8 +8,29 @@
 import SwiftUI
 
 struct FavoriteView: View {
+    
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \CharacterEntity.name,ascending: true)],
+        predicate: NSPredicate(format: "isFavorite == true"),
+        animation: .default
+    )private var favorites: FetchedResults<CharacterEntity>
+    
+    @Environment(\.managedObjectContext) private var viewContext
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView{
+            
+            if favorites.isEmpty {
+                Text("No favorites yet ❤️")
+                    .foregroundColor(.gray)
+            }else{
+                List{
+                    ForEach(favorites){character in
+                        Text(character.name ?? "Unknown")
+                    }
+                }
+            }
+        }
     }
 }
 

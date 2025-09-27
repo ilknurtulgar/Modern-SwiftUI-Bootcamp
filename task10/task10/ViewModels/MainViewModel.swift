@@ -15,7 +15,7 @@ class MainViewModel: ObservableObject {
     @Published var errorMsg: String?
     
     private let service = NetworkService()
-    private let viewContext: NSManagedObjectContext
+     let viewContext: NSManagedObjectContext
     
     init(viewContext: NSManagedObjectContext) {
         self.viewContext = viewContext

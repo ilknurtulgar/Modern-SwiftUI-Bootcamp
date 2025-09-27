@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct CharacterDetailView: View {
-    var character: CharacterEntity
+    @Environment(\.managedObjectContext) private var viewContext
+    @ObservedObject var character: CharacterEntity
+    
     var body: some View {
         ScrollView{
             VStack(spacing: 15){
@@ -34,15 +36,15 @@ struct CharacterDetailView: View {
                     
                     Text("Gender: \(character.gender ?? "Unknown")")
                         .font(.subheadline)
-                        
+                    
                     
                     Text("Origin: \(character.originName ?? "Unknown")")
                         .font(.subheadline)
-                        
+                    
                     
                     Text("Location: \(character.locationName ?? "Unknown")")
                         .font(.subheadline)
-                  
+                    
                     
                 }
                 .padding(.horizontal)
@@ -52,10 +54,19 @@ struct CharacterDetailView: View {
         }
         .navigationTitle(character.name ?? "")
         .navigationBarTitleDisplayMode(.inline)
-        
+        .toolbar{
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    character.isFavorite.toggle()
+                    try? viewContext.save()
+                }) {
+                    Image(systemName: character.isFavorite ? "heart.fill" : "heart")
+                        .foregroundColor(character.isFavorite ? .red : .gray)
+                }
+            }
+        }
     }
 }
-
 
 #Preview {
     CharacterDetailView(character: CharacterEntity())
