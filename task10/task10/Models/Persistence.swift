@@ -15,7 +15,7 @@ struct PersistenceController {
     let container : NSPersistentContainer
     
     init() {
-        container = NSPersistentContainer(name: "Character")
+        container = NSPersistentContainer(name: "CharacterEntity")
         container.loadPersistentStores{storeDescription, error in
         if let error = error as NSError? {
                 fatalError("unresolved error: \(error)")
