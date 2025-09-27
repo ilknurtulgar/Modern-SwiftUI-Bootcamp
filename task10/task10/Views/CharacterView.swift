@@ -18,16 +18,16 @@ struct CharacterView: View {
             }else if let error = viewModel.errorMsg{
                 Text("Error: \(error)")
                     .foregroundColor(.red)
-                    
+                
             }else if viewModel.characters.isEmpty{
                 Text("no characters found")
                     .foregroundColor(.gray)
             } else {
                 List{
-                    ForEach(viewModel.characters){character in
+                    ForEach(viewModel.characters,id: \.self){character in
                         NavigationLink(destination: CharacterDetailView(character: character)){
                             HStack{
-                               AsyncImage(url: URL(string: character.image ?? "")){image in
+                                AsyncImage(url: URL(string: character.image ?? "")){image in
                                     image.resizable()
                                 }placeholder: {
                                     ProgressView()
@@ -57,7 +57,7 @@ struct CharacterView: View {
                 .navigationTitle("Characters")
             }
         }
-    
+        
         .task {
             await viewModel.fetchCharactersFromAPI()
         }

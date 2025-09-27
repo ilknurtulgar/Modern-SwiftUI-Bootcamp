@@ -10,11 +10,53 @@ import SwiftUI
 struct CharacterDetailView: View {
     var character: CharacterEntity
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView{
+            VStack(spacing: 15){
+                AsyncImage(url: URL(string: character.image ?? "")){image in
+                    image.resizable()
+                        .scaledToFill()
+                        .frame(height: 300)
+                        .cornerRadius(15)
+                }placeholder: {
+                    ProgressView()
+                        .frame(height: 300)
+                }
+                VStack(alignment: .leading,spacing: 8){
+                    Text(character.name ?? "Unknown")
+                        .font(.title)
+                        .bold()
+                    
+                    HStack{
+                        Text("Status: \(character.status ?? "Unknown")")
+                        Text("Species: \(character.species ?? "Unknown")")
+                    }
+                    .font(.subheadline)
+                    
+                    Text("Gender: \(character.gender ?? "Unknown")")
+                        .font(.subheadline)
+                        
+                    
+                    Text("Origin: \(character.originName ?? "Unknown")")
+                        .font(.subheadline)
+                        
+                    
+                    Text("Location: \(character.locationName ?? "Unknown")")
+                        .font(.subheadline)
+                  
+                    
+                }
+                .padding(.horizontal)
+                Spacer()
+            }
+            .padding(.top)
+        }
+        .navigationTitle(character.name ?? "")
+        .navigationBarTitleDisplayMode(.inline)
+        
     }
 }
 
-//
-//#Preview {
-//    CharacterDetailView(character: Chara)
-//}
+
+#Preview {
+    CharacterDetailView(character: CharacterEntity())
+}

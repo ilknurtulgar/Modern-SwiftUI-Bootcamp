@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreData
 
-
+@MainActor
 class MainViewModel: ObservableObject {
     @Published var characters: [CharacterEntity] = []
     @Published var isLoading = false
