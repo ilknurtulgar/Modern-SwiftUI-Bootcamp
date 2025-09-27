@@ -13,7 +13,7 @@ struct task10App: App {
 
     var body: some Scene {
         WindowGroup {
-            RickAndMortyView()
+            CharacterView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

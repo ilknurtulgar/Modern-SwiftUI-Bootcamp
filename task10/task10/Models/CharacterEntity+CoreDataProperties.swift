@@ -1,5 +1,5 @@
 //
-//  CharachterEntity+CoreDataProperties.swift
+//  CharacterEntity+CoreDataProperties.swift
 //  task10
 //
 //  Created by İlknur Tulgar on 27.09.2025.
@@ -10,10 +10,10 @@ import Foundation
 import CoreData
 
 
-extension CharachterEntity {
+extension CharacterEntity {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<CharachterEntity> {
-        return NSFetchRequest<CharachterEntity>(entityName: "CharachterEntity")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<CharacterEntity> {
+        return NSFetchRequest<CharacterEntity>(entityName: "CharacterEntity")
     }
 
     @NSManaged public var id: Int64
@@ -27,6 +27,6 @@ extension CharachterEntity {
 
 }
 
-extension CharachterEntity : Identifiable {
+extension CharacterEntity : Identifiable {
 
 }

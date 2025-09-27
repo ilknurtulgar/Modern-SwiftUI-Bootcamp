@@ -5,13 +5,12 @@
 //  Created by İlknur Tulgar on 27.09.2025.
 //
 
-import Foundation
 
-struct CharachterResponse: Codable {
-    let results: [Charachter]
+struct CharacterResponse: Codable {
+    let results: [Character]
 }
 
-struct Charachter: Codable, Identifiable {
+struct Character: Codable, Identifiable {
     let id: Int
     let name: String
     let status: String

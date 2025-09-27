@@ -9,7 +9,7 @@ import Foundation
 
 struct NetworkService{
     
-    func fetchCharacters(page: Int = 1) async throws -> [Charachter] {
+    func fetchCharacters(page: Int = 1) async throws -> [Character] {
         let urlString = "https://rickandmortyapi.com/api/character?page=\(page)"
         guard let url = URL(string: urlString)else{
             throw URLError(.badURL)
@@ -17,7 +17,7 @@ struct NetworkService{
         
         let (data,_) = try await URLSession.shared.data(from: url)
         
-        let decodedResponse = try JSONDecoder().decode(CharachterResponse.self, from: data)
+        let decodedResponse = try JSONDecoder().decode(CharacterResponse.self, from: data)
         return decodedResponse.results
     }
 }
