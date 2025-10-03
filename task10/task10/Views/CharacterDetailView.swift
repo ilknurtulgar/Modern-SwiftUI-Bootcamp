@@ -55,16 +55,16 @@ struct CharacterDetailView: View {
         .navigationTitle(character.name ?? "")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar{
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    character.isFavorite.toggle()
-                    try? viewContext.save()
-                }) {
-                    Image(systemName: character.isFavorite ? "heart.fill" : "heart")
-                        .foregroundColor(character.isFavorite ? .red : .gray)
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        character.isFavorite.toggle()
+                        try? viewContext.save()
+                    }) {
+                        Image(systemName: character.isFavorite ? "heart.fill" : "heart")
+                            .foregroundColor(character.isFavorite ? .red : .gray)
+                    }
                 }
             }
-        }
     }
 }
 

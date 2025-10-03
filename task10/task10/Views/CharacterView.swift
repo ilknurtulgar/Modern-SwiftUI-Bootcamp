@@ -10,6 +10,8 @@ import CoreData
 
 struct CharacterView: View {
     @StateObject private var viewModel = MainViewModel(viewContext: PersistenceController.shared.container.viewContext)
+    @Environment(\.managedObjectContext) private var viewContext
+    
    
     var body: some View {
         NavigationView{
@@ -26,37 +28,8 @@ struct CharacterView: View {
                 List{
                     ForEach(viewModel.characters,id: \.self){character in
                         NavigationLink(destination: CharacterDetailView(character: character)){
-                            HStack{
-                                AsyncImage(url: URL(string: character.image ?? "")){image in
-                                    image.resizable()
-                                }placeholder: {
-                                    ProgressView()
-                                }
-                                .frame(width: 50, height: 50)
-                                .clipShape(Circle())
-                                
-                                VStack(alignment: .leading){
-                                    Text(character.name ?? "Unknown")
-                                        .font(.headline)
-                                    Text(character.species ?? "")
-                                        .font(.subheadline)
-                                        .foregroundColor(.gray)
-                                    Text(character.status ?? "")
-                                        .font(.subheadline)
-                                        .foregroundColor(.gray)
-                                }
-                                Spacer()
-                                
-                                Button(action: {
-                                    character.isFavorite.toggle()
-                                    try? viewContext.save()
-                                }) {
-                                    Image(systemName: character.isFavorite ? "heart.fill" : "heart")
-                                        .foregroundColor(character.isFavorite ? .red : .gray)
-                                }
-                            }
-                            .padding(.vertical,5)
-                        }
+                            CharacterRowView(character: character)
+            }
                     }
                 }
                 .listStyle(.plain)
