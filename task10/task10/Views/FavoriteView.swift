@@ -11,22 +11,22 @@ struct FavoriteView: View {
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \CharacterEntity.name,ascending: true)],
-        predicate: NSPredicate(format: "isFavorite == true"),
+        predicate: NSPredicate(format: "isFavorite == %@", NSNumber(value: true)),
         animation: .default
     )private var favorites: FetchedResults<CharacterEntity>
     
     @Environment(\.managedObjectContext) private var viewContext
     
     var body: some View {
-        NavigationView{
+        VStack{
             
             if favorites.isEmpty {
                 Text("No favorites yet ❤️")
                     .foregroundColor(.gray)
             }else{
                 List{
-                    ForEach(favorites){character in
-                        Text(character.name ?? "Unknown")
+                    ForEach(favorites,id: \.id){character in
+                        CharacterRowView(character: character)
                     }
                 }
             }

@@ -37,14 +37,20 @@ struct CharacterRowView: View {
             
             Spacer()
             
-            Button(action: {
-                character.isFavorite.toggle()
-                
-                try? viewContext.save()
-            }) {
-                Image(systemName: character.isFavorite ? "heart.fill" : "heart")
-                    .foregroundColor(character.isFavorite ? .red : .gray)
-            }
+//            Button(action: {
+//                print("patladim")
+//                character.isFavorite.toggle()
+//                
+//                do {
+//                      try viewContext.save()
+//                      print("Saved favorite")
+//                  } catch {
+//                      print("Failed to save: \(error)")
+//                  }
+//            }) {
+//                Image(systemName: character.isFavorite ? "heart.fill" : "heart")
+//                    .foregroundColor(character.isFavorite ? .red : .gray)
+//            }
         }
         .padding(.vertical,5)
     }

@@ -58,7 +58,12 @@ struct CharacterDetailView: View {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button(action: {
                         character.isFavorite.toggle()
-                        try? viewContext.save()
+                        do {
+                                try viewContext.save()
+                            print("saved")
+                            } catch {
+                                print("Failed to save favorite: \(error.localizedDescription)")
+                            }
                     }) {
                         Image(systemName: character.isFavorite ? "heart.fill" : "heart")
                             .foregroundColor(character.isFavorite ? .red : .gray)
