@@ -7,36 +7,44 @@
 
 import SwiftUI
 import SwiftData
+import WidgetKit
 
 struct ContentView: View {
     @Environment(\.modelContext) private var context
     @StateObject private var viewModel = WaterViewModel()
-       
+    
     var body: some View {
         VStack(spacing: 20){
-            Text("the cup drunk today: \(viewModel.todayCount)")
+            Text("The cup drunk today: \(viewModel.todayCount)")
                 .font(.title)
             
             HStack(spacing: 10){
-                ForEach(0..<8){index in
+                ForEach(0..<8){ index in
                     Image(systemName: index < viewModel.todayCount ? "drop.fill" : "drop")
                         .foregroundColor(.blue)
                         .font(.title2)
                 }
             }
             
-            Button(action: {
-                viewModel.addGlass(context: context)
-            }){
-                Text("+1 Glass")
-                    .padding()
-                    .frame(maxWidth: .infinity)
+            if viewModel.todayCount < 8 {
+                Button("+1 Glass") {
+                    viewModel.addGlass(context: context)
+                }
+                .buttonStyle(.borderedProminent)
+            }else{
+                Text("🎯 The target has been reached!")
+                    .font(.headline)
+                    .foregroundColor(.red)
             }
-            .buttonStyle(.borderedProminent)
+            
         }
         .padding()
+        .onAppear{
+            viewModel.loadTodayCount(context: context)
+        }
     }
 }
+
 
 #Preview {
     ContentView()

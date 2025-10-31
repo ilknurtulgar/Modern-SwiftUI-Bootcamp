@@ -6,36 +6,41 @@
 //
 
 import SwiftUI
-import WidgetKit
 import SwiftData
+import WidgetKit
 
 @MainActor
-class WaterViewModel: ObservableObject{
+class WaterViewModel: ObservableObject {
+    @Published var todayCount: Int = 0
     
- 
-    
-    @Query(sort: \WaterIntake.date, order: .reverse)
-    var waterIntakes: [WaterIntake]
-    
-  
-    
-    func addGlass(context: ModelContext){
+    func loadTodayCount(context: ModelContext) {
         let today = Date()
+        let descriptor = FetchDescriptor<WaterIntake>(
+            sortBy: [SortDescriptor(\WaterIntake.date, order: .forward)]
+        )
+        let allIntakes = (try? context.fetch(descriptor)) ?? []
+        todayCount = allIntakes.first(where: { Calendar.current.isDate($0.date, inSameDayAs: today) })?.count ?? 0
+    }
+    
+    func addGlass(context: ModelContext) {
+        let today = Date()
+        let descriptor = FetchDescriptor<WaterIntake>(
+            sortBy: [SortDescriptor(\WaterIntake.date, order: .forward)]
+        )
+        let allIntakes = (try? context.fetch(descriptor)) ?? []
         
-        if let intake = waterIntakes.first(where: {Calendar.current.isDate($0.date, inSameDayAs: today)}){
+        if let intake = allIntakes.first(where: { Calendar.current.isDate($0.date, inSameDayAs: today) }) {
             intake.count += 1
-        }else {
+        } else {
             let newIntake = WaterIntake(date: today, count: 1)
             context.insert(newIntake)
         }
         
         try? context.save()
-        WidgetCenter.shared.reloadAllTimelines()//widget update
-    }
-    
-    var todayCount: Int {
-        let today = Date()
-        return waterIntakes.first(where: { Calendar.current.isDate($0.date, inSameDayAs: today) })?.count ?? 0
+        WidgetCenter.shared.reloadAllTimelines()
+        
+        loadTodayCount(context: context) // Güncel sayıyı publish et
     }
 }
+
 
