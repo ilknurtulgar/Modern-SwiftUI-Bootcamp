@@ -35,5 +35,16 @@ The project demonstrates the use of Core Data for local storage and full **CRUD*
 This is a simple Weather App developed using **SwiftUI** and **MVVM architecture**.  
 The app fetches real-time weather data from the **OpenWeather API** using `URLSession` and decodes the JSON response into Swift models with the **`Codable` protocol**.
 
+### 📌 Assignment 10 – Rick and Morty Browser
+📌 Assignment 11 – Rick and Morty Browser
+A SwiftUI app using the Rick and Morty API with a **NetworkService** and **Core Data** for local favorites. Features character list, detail view, search, pull-to-refresh, infinite scroll, async/await, basic image caching, and MVVM architecture.
 
+
+### 📌 Assignment 11 – Location-Based Map App (SwiftUI & CoreLocation)
+This assignment focuses on building a location-based app using SwiftUI and CoreLocation. Users can:
+
+- Grant location permission (While Using the App / Always).  
+- See their current location updated live on a map with coordinates and reverse-geocoded address.  
+- Add favorite locations via a button (markers appear on the map).  
+- View a list of favorite locations in a separate Favorites screen.
 
