@@ -8,11 +8,24 @@
 import SwiftUI
 
 struct FavoritesView: View {
+    @ObservedObject var homeViewModel: HomeViewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List(homeViewModel.favoriteLocation,id:\.id){fav in
+            VStack(alignment: .leading){
+                Text(fav.name)
+                    .font(.headline)
+                Text("Lat: \(fav.latitude), Lon: \(fav.longitude)")
+                    .font(.subheadline)
+                Text("Eklenme Tarihi: \(fav.dateAdded.formatted())")
+                    .font(.caption)
+            }
+            .padding(4)
+        }
+        .navigationTitle("Favorites Locations")
     }
 }
 
-#Preview {
-    FavoritesView()
-}
+//#Preview {
+//    FavoritesView()
+//}
