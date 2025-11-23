@@ -5,8 +5,8 @@
 //  Created by İlknur Tulgar on 31.10.2025.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 @main
 struct task12App: App {
@@ -14,7 +14,15 @@ struct task12App: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .modelContainer(for: [WaterIntake.self])
+                .modelContainer(
+                    for: WaterIntake.self,
+                    configuration: .shared(
+                        named: "watertracker",
+                        in: .init(
+                            groupIdentifier: "group.com.ilknur.watertracker"
+                        )
+                    )
+                )
         }
     }
 }
