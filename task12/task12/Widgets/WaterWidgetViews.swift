@@ -10,28 +10,29 @@ import WidgetKit
 import AppIntents
 
 struct WaterWidgetViews: View {
-    let entry: WaterProvider.Entry
+    let entry: WaterEntry
     
     var body: some View {
-        VStack{
-            Text("💧 Water Today")
+        VStack(spacing: 25){
+            Text("🚰 Water Intake Tracking")
                 .font(.headline)
-            Text("\(entry.count) / 8")
-                .font(.title)
             
-            HStack{
-                ForEach(0..<8){i in
+            HStack(spacing: 5){
+                ForEach(0..<8){ i in
                     Button(intent: AddWaterGlassIntent()){
                         Image(systemName: i < entry.count ? "drop.fill" : "drop")
-                                                  .foregroundColor(.pink)
+                            .foregroundColor(.blue)
                     }
+                    .disabled(entry.count >= 8)
                 }
+            }
+            
+            if entry.count >= 8 {
+                Text("🎯 Target achieved!")
+                    .font(.headline)
+                    .foregroundColor(.red)
             }
         }
         .padding()
     }
 }
-//
-//#Preview {
-//    WaterWidgetViews()
-//}

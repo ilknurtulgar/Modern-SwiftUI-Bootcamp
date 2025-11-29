@@ -42,6 +42,10 @@ struct ContentView: View {
         .onAppear{
             viewModel.loadTodayCount(context: context)
         }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+            
+            viewModel.loadTodayCount(context: context)
+        }
     }
 }
 

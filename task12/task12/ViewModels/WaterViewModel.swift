@@ -27,20 +27,27 @@ class WaterViewModel: ObservableObject {
         let descriptor = FetchDescriptor<WaterIntake>(
             sortBy: [SortDescriptor(\WaterIntake.date, order: .forward)]
         )
-        let allIntakes = (try? context.fetch(descriptor)) ?? []
-        
-        if let intake = allIntakes.first(where: { Calendar.current.isDate($0.date, inSameDayAs: today) }) {
+   
+        var todayIntake: WaterIntake
+        if let intake = (try? context.fetch(descriptor))?.first(where: { Calendar.current.isDate($0.date, inSameDayAs: today) }) {
+            if intake.count >= 8 {
+                todayCount = 8
+                return
+            }
             intake.count += 1
+            todayIntake = intake
         } else {
-            let newIntake = WaterIntake(date: today, count: 1)
-            context.insert(newIntake)
+            todayIntake = WaterIntake(date: today, count: 1)
+            context.insert(todayIntake)
         }
         
         try? context.save()
-        WidgetCenter.shared.reloadAllTimelines()
         
-        loadTodayCount(context: context) // Güncel sayıyı publish et
+        todayCount = todayIntake.count
+
+        WidgetCenter.shared.reloadAllTimelines()
     }
 }
+
 
 

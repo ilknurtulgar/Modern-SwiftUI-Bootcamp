@@ -1,16 +1,8 @@
-//
-//  WaterWidgetProvider.swift
-//  task12
-//
-//  Created by İlknur Tulgar on 23.11.2025.
-//
-
 import WidgetKit
 import SwiftUI
 import SwiftData
 
 struct WaterProvider: TimelineProvider {
-    
     
     func placeholder(in context: Context) -> WaterEntry {
         WaterEntry(date: Date(), count: 0)
@@ -28,20 +20,24 @@ struct WaterProvider: TimelineProvider {
     }
     
     private func loadTodayCount() -> Int {
-        guard let container = try? ModelContainer(
-            for: WaterIntake.self,
-            configuration: .shared(
-                named: "watertracker",
-                in: .init(groupIdentifier: "group.com.ilknur.watertracker")
-            )
-        ) else { return 0 }
+        let url = FileManager.default.containerURL(
+            forSecurityApplicationGroupIdentifier: "group.com.info.task12.watertracker"
+        )!.appendingPathComponent("water.sqlite")
+
+        let schema = Schema([WaterIntake.self])
+
+        let configuration = ModelConfiguration(schema: schema, url: url)
+
+        guard let container = try? ModelContainer(for: schema, configurations: [configuration]) else {
+            return 0
+        }
 
         let context = ModelContext(container)
         let descriptor = FetchDescriptor<WaterIntake>()
         let items = (try? context.fetch(descriptor)) ?? []
 
         let today = Date()
-        return items.first(where: { Calendar.current.isDate($0.date, inSameDayAs: today) })?.count ?? 0
+        return items.first { Calendar.current.isDate($0.date, inSameDayAs: today) }?.count ?? 0
     }
 
 }
