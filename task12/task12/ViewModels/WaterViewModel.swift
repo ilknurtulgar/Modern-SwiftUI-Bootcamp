@@ -36,12 +36,10 @@ class WaterViewModel: ObservableObject {
                 todayIntake = WaterIntake(date: today, count: 0)
                 context.insert(todayIntake)
             }
-            
-            // Toggle mantığı
             if index < todayIntake.count {
-                todayIntake.count -= 1 // doluysa azalt
+                todayIntake.count -= 1
             } else if todayIntake.count < 8 {
-                todayIntake.count += 1 // boşsa artır
+                todayIntake.count += 1
             }
             
             try? context.save()
