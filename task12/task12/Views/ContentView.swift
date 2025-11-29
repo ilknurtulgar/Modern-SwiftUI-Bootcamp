@@ -19,24 +19,28 @@ struct ContentView: View {
                 .font(.title)
             
             HStack(spacing: 10){
-                ForEach(0..<8){ index in
-                    Image(systemName: index < viewModel.todayCount ? "drop.fill" : "drop")
-                        .foregroundColor(.blue)
-                        .font(.title2)
+                ForEach(0..<8) { index in
+                    Button {
+                        viewModel.toggleGlass(at: index, context: context)
+                    } label: {
+                        Image(systemName: index < viewModel.todayCount ? "drop.fill" : "drop")
+                            .foregroundColor(.blue)
+                            .font(.title2)
+                    }
                 }
             }
+
             
             if viewModel.todayCount < 8 {
                 Button("+1 Glass") {
-                    viewModel.addGlass(context: context)
+                    viewModel.toggleGlass(at: viewModel.todayCount, context: context)
                 }
                 .buttonStyle(.borderedProminent)
-            }else{
+            } else {
                 Text("🎯 The target has been reached!")
                     .font(.headline)
                     .foregroundColor(.red)
             }
-            
         }
         .padding()
         .onAppear{

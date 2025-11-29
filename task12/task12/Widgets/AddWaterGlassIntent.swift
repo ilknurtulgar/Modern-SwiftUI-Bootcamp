@@ -1,4 +1,3 @@
-
 import AppIntents
 import SwiftData
 import WidgetKit
@@ -27,12 +26,10 @@ struct AddWaterGlassIntent: AppIntent {
         let allIntakes = (try? context.fetch(descriptor)) ?? []
         
         if let intake = allIntakes.first(where: { Calendar.current.isDate($0.date, inSameDayAs: today) }) {
-            // Sınır 8
             if intake.count < 8 {
                 intake.count += 1
             }
         } else {
-            // Yeni intake başlat
             let newIntake = WaterIntake(date: today, count: 1)
             context.insert(newIntake)
         }
