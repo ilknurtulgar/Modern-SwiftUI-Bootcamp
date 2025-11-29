@@ -22,6 +22,7 @@ struct WaterWidgetViews: View {
                     Button(intent: AddWaterGlassIntent()){
                         Image(systemName: i < entry.count ? "drop.fill" : "drop")
                             .foregroundColor(.blue)
+                        
                     }
                     .disabled(entry.count >= 8)
                 }
@@ -33,6 +34,9 @@ struct WaterWidgetViews: View {
                     .foregroundColor(.red)
             }
         }
-        .padding()
+        .padding(30)
+        .containerBackground(for: .widget) {
+            Color(.systemBackground)
+        }
     }
 }
